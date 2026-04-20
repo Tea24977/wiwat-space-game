@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Цитадель: Вторая Реальность</title>
+    <style>
+        /* Это стили (CSS), чтобы страница выглядела как игра */
+        body {
+            background-color: #0d1117; /* Темный космос */
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #30363d;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        .energy-val {
+            color: #e3b341; /* Золотой цвет энергии */
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #238636;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:active {
+            background-color: #2ea043;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 Моя Цитадель</h1>
+
+    <div class="resource-card">
+        <p>Накоплено энергии:</p>
+        <div class="energy-val">1,250 ГВт</div>
+    </div>
+
+    <div class="resource-card">
+        <p>Статус флота:</p>
+        <p>🛰 Кораблей: 3</p>
+    </div>
+
+    <button onclick="mine()">⚡️ Добыть энергию</button>
+
+    <script>
+        // Это JavaScript (мозг страницы)
+        function mine() {
+            alert("Вы добыли 10 ГВт!");
+            // Позже здесь будет код, который отправляет данные в твоего бота
+        }
+    </script>
+
+</body>
+</html>
