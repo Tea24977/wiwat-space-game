@@ -2,75 +2,78 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Цитадель: Вторая Реальность</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цитадель: Консоль Управления</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* Это стили (CSS), чтобы страница выглядела как игра */
         body {
-            background-color: #0d1117; /* Темный космос */
+            background: radial-gradient(circle, #1b2735 0%, #090a0f 100%);
             color: white;
-            font-family: sans-serif;
-            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .resource-card {
-            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
+            margin: 0;
+            height: 100vh;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #3498db;
             border-radius: 15px;
-            border: 1px solid #30363d;
-            width: 80%;
-            margin-bottom: 20px;
+            padding: 15px;
+            width: 90%;
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
         }
-
-        .energy-val {
-            color: #e3b341; /* Золотой цвет энергии */
-            font-size: 24px;
-            font-weight: bold;
-        }
-
+        .energy-val { color: #f1c40f; font-weight: bold; font-size: 1.2em; }
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 95%; margin-top: 20px; }
         button {
-            background-color: #238636;
+            background: #2980b9;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
         }
-
-        button:active {
-            background-color: #2ea043;
-        }
+        button.action { background: #27ae60; }
+        button:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
-    <h1>🚀 Моя Цитадель</h1>
+    <h2>🛰 КОНСОЛЬ ЦИТАДЕЛИ</h2>
 
-    <div class="resource-card">
-        <p>Накоплено энергии:</p>
-        <div class="energy-val">1,250 ГВт</div>
+    <div class="stat-card">
+        <p>⚡ Энергия: <span id="energy" class="energy-val">Загрузка...</span></p>
+        <p>📊 Уровень: <span id="level">1</span></p>
     </div>
 
-    <div class="resource-card">
-        <p>Статус флота:</p>
-        <p>🛰 Кораблей: 3</p>
+    <div class="btn-group">
+        <button onclick="sendAction('get_energy')">⛏ Добыть энергию</button>
+        <button onclick="sendAction('up_level')">🆙 Повысить уровень</button>
+        <button class="action" onclick="sendAction('open_dock')">🏗 Верфь</button>
+        <button class="action" onclick="sendAction('go_space')">🚀 В космос</button>
     </div>
-
-    <button onclick="mine()">⚡️ Добыть энергию</button>
 
     <script>
-        // Это JavaScript (мозг страницы)
-        function mine() {
-            alert("Вы добыли 10 ГВт!");
-            // Позже здесь будет код, который отправляет данные в твоего бота
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Расширяем на весь экран
+
+        // Получаем данные, которые бот передал в ссылке
+        const urlParams = new URLSearchParams(window.location.search);
+        const userEnergy = urlParams.get('energy') || '0';
+        const userLevel = urlParams.get('level') || '1';
+
+        // Отображаем их
+        document.getElementById('energy').innerText = userEnergy + " ГВт";
+        document.getElementById('level').innerText = userLevel;
+
+        // Функция отправки команды боту
+        function sendAction(command) {
+            tg.sendData(command); // Отправляет текст боту и закрывает окно
         }
     </script>
-
 </body>
 </html>
